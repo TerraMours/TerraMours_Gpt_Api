@@ -36,6 +36,14 @@ namespace TerraMours_Gpt.Framework.Infrastructure.Contracts.ProductModels
         /// </summary>
         public int? Stock { get; set; }
         /// <summary>
+        /// 是否是Vip(包月会员)
+        /// </summary>
+        public bool? IsVIP { get; set; }
+        /// <summary>
+        /// 会员等级 (1 为月度会员，2为极度会员，3会年度会员这与 价格相关，由于user表已经设计了，下次遇到相似问题设计为enum类)
+        /// </summary>
+        public int? VipLevel { get; set; }
+        /// <summary>
         /// 商品分类Id
         /// </summary>
         public long CategoryId { get; set; }
@@ -52,13 +60,17 @@ namespace TerraMours_Gpt.Framework.Infrastructure.Contracts.ProductModels
         /// <param name="price"></param>
         /// <param name="categoryId"></param>
         /// <param name="stock"></param>
-        public Product(string name, string description, decimal price, long categoryId, int? stock)
+        /// <param name="isVIP"></param>
+        /// <param name="vipLevel"></param>
+        public Product(string name, string description, decimal price, long categoryId, int? stock, bool? isVIP, int? vipLevel)
         {
             //初始化用户 ：以下是有用的字段
             this.Name = name;
             this.Description = description;
             this.Price = price;
             this.CategoryId = categoryId;
+            this.IsVIP = isVIP;
+            this.VipLevel = vipLevel;
             //EntityBase
             Enable = true;
             CreateDate = DateTime.Now;
@@ -72,12 +84,16 @@ namespace TerraMours_Gpt.Framework.Infrastructure.Contracts.ProductModels
         /// <param name="description"></param>
         /// <param name="price"></param>
         /// <param name="categoryId"></param>
+        /// <param name="isVIP"></param>
+        /// <param name="vipLevel"></param>
         /// <returns></returns>
-        public Product UpdateProduct(string name, string description, decimal price, long categoryId)
+        public Product UpdateProduct(string name, string description, decimal price, long categoryId, bool? isVIP, int? vipLevel)
         {
             this.Name = name;
             this.Description = description;
             this.Price = price;
+            this.IsVIP = isVIP;
+            this.VipLevel = vipLevel;
             this.CategoryId = categoryId;
             this.ModifyDate = DateTime.Now;
             return this;
