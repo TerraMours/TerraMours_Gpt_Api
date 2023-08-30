@@ -62,7 +62,7 @@ namespace TerraMours_Gpt.Domains.PayDomain.Services
 
             //此时应该先在自己的order表里面创建一个待支付的订单
 
-            var order = new Order(req.ProductId, req.Name, req.Description, req.Price, req.UserId, tradeNo, req.IsVIP, req.VipLevel);
+            var order = new Order(req.ProductId, req.Name, req.Description, req.Price, req.UserId, tradeNo, req.IsVIP, req.VipLevel, req.VipTime);
             await _dbContext.Orders.AddAsync(order);
             await _dbContext.SaveChangesAsync();
 

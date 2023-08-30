@@ -55,9 +55,13 @@ namespace TerraMours_Gpt.Domains.PayDomain.Contracts.Req
         /// </summary>
         public bool? IsVIP { get; set; }
         /// <summary>
-        /// 会员等级 (1 为月度会员，2为极度会员，3会年度会员这与 价格相关，由于user表已经设计了，下次遇到相似问题设计为enum类)
+        /// 会员等级 
         /// </summary>
         public int? VipLevel { get; set; }
+        /// <summary>
+        /// vip充值时间 按月算  数字就是月数
+        /// </summary>
+        public int? VipTime { get; set; }
 
     }
 }

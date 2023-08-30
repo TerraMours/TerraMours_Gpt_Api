@@ -40,9 +40,13 @@ namespace TerraMours_Gpt.Framework.Infrastructure.Contracts.ProductModels
         /// </summary>
         public bool? IsVIP { get; set; }
         /// <summary>
-        /// 会员等级 (1 为月度会员，2为极度会员，3会年度会员这与 价格相关，由于user表已经设计了，下次遇到相似问题设计为enum类)
+        /// 会员等级 （1、2、3、设置青铜会员，白银会员，黄金会员，或者什么普通vip，超级vip都行）
         /// </summary>
         public int? VipLevel { get; set; }
+        /// <summary>
+        /// vip充值时间 按月算  数字就是月数
+        /// </summary>
+        public int? VipTime { get; set; }
         /// <summary>
         /// 商品分类Id
         /// </summary>
@@ -62,7 +66,8 @@ namespace TerraMours_Gpt.Framework.Infrastructure.Contracts.ProductModels
         /// <param name="stock"></param>
         /// <param name="isVIP"></param>
         /// <param name="vipLevel"></param>
-        public Product(string name, string description, decimal price, long categoryId, int? stock, bool? isVIP, int? vipLevel)
+        /// <param name="vipTime"></param>
+        public Product(string name, string description, decimal price, long categoryId, int? stock, bool? isVIP, int? vipLevel, int? vipTime)
         {
             //初始化用户 ：以下是有用的字段
             this.Name = name;
@@ -71,6 +76,7 @@ namespace TerraMours_Gpt.Framework.Infrastructure.Contracts.ProductModels
             this.CategoryId = categoryId;
             this.IsVIP = isVIP;
             this.VipLevel = vipLevel;
+            this.VipTime = vipTime;
             //EntityBase
             Enable = true;
             CreateDate = DateTime.Now;
@@ -86,14 +92,16 @@ namespace TerraMours_Gpt.Framework.Infrastructure.Contracts.ProductModels
         /// <param name="categoryId"></param>
         /// <param name="isVIP"></param>
         /// <param name="vipLevel"></param>
+        /// <param name="vipTime"></param>
         /// <returns></returns>
-        public Product UpdateProduct(string name, string description, decimal price, long categoryId, bool? isVIP, int? vipLevel)
+        public Product UpdateProduct(string name, string description, decimal price, long categoryId, bool? isVIP, int? vipLevel, int? vipTime)
         {
             this.Name = name;
             this.Description = description;
             this.Price = price;
             this.IsVIP = isVIP;
             this.VipLevel = vipLevel;
+            this.VipTime = vipTime;
             this.CategoryId = categoryId;
             this.ModifyDate = DateTime.Now;
             return this;

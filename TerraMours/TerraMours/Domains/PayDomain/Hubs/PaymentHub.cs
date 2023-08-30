@@ -137,23 +137,9 @@ namespace TerraMours_Gpt.Domains.PayDomain.Hubs
 
                 if (order.IsVIP == true)
                 {//购买会员
-                    switch (order.VipLevel)
-                    {
-                        case 1:
-                            vipExpireTime = vipExpireTime.AddDays(30);
-                            break;
-                        case 2:
-                            vipExpireTime = vipExpireTime.AddDays(90);
-                            break;
-                        case 3:
-                            vipExpireTime = vipExpireTime.AddDays(365);
-                            break;
-                        default:
-                            vipExpireTime = DateTime.Now;
-                            break;
-                    }
+
                     user.VipLevel = order.VipLevel;
-                    user.VipExpireTime = vipExpireTime;
+                    user.VipExpireTime = vipExpireTime.AddMonths(order.VipTime.Value);
                     _dbContext.SysUsers.Update(user);
                     await _dbContext.SaveChangesAsync();
 
